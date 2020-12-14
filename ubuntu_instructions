@@ -1,0 +1,18 @@
+FROM ubuntu:18.04
+MAINTAINER WhiteSource Software
+ENV DEBIAN_FRONTEND noninteractive
+RUN apt-get clean
+ONBUILD RUN apt-get update
+RUN apt-get update && apt-get install -y wget
+ARG USER_HOME_DIR="/root"
+COPY whitesource.txt /root/whitesource/
+COPY whitesource.txt /root/whitesourceW/
+ADD welcome.txt /root/welcome/
+USER root
+EXPOSE 8080
+VOLUME /root
+LABEL release-date="2020-11-29"
+WORKDIR /
+STOPSIGNAL SIGQUIT
+ENTRYPOINT [""]
+CMD ["bash"]
