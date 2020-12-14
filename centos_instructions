@@ -1,0 +1,18 @@
+FROM  centos:centos7.2.1511
+MAINTAINER WhiteSource Software
+ENV CANONICAL_WEB_URL=
+RUN yum clean all -y
+ONBUILD RUN yum clean all -y
+RUN yum install -y wget
+ARG USER_HOME_DIR="/root"
+COPY whitesource.txt /root/whitesource/
+COPY whitesource.txt /root/whitesourceW/
+ADD welcome.txt /root/welcome/
+USER root
+EXPOSE 8080
+VOLUME /root
+LABEL release-date="2020-11-29"
+WORKDIR /
+STOPSIGNAL SIGQUIT
+ENTRYPOINT [""]
+CMD ["bash"]
