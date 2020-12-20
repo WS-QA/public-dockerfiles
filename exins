@@ -1,0 +1,6 @@
+FROM ubuntu:18.04
+RUN apt-get update -y && apt-get install curl -y
+ONBUILD ADD welcome.txt /root/welcome/
+ONBUILD RUN apt-get update
+HEALTHCHECK --interval=5m --timeout=3s \ 
+   CMD curl -f http://localhost/ || exit 1
